@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,34 @@ import AddProduct from "../(screen)/AddProduct";
 import Order from "../(screen)/Order";
 import ProductList from "../(screen)/ProductList";
 
+import Cookie from "js-cookie";
+import axios from "axios";
+import { Heading1 } from "lucide-react";
+
 const page = () => {
     const [activeTab, setActiveTab] = useState<"add" | "list" | "order" | null>(null);
+
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
+
+    useEffect(() => {
+        const token = Cookie.get("token");
+        axios
+            .get("http://127.0.0.1:8000/test/extra/superuser/", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                setIsAdmin(true);
+                setMessage(response.data.msg);
+            })
+            .catch((error) => {
+                console.log("error fetching data", error);
+                setMessage("you are not admin");
+            });
+    }, []);
 
     return (
         <>
@@ -31,7 +57,7 @@ const page = () => {
             </div>
 
             <div>
-                {activeTab === null && <h1 className="text-3xl text-red-500 text-center">Sorry you are not admin!</h1>}
+                {activeTab === null && <h1 className="font-bold text-5xl text-center text-red-500 my-10">{message}</h1>}
                 {activeTab === "add" && <AddProduct />}
                 {activeTab === "list" && <ProductList />}
                 {activeTab === "order" && <Order />}

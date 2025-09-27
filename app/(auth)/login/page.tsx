@@ -2,7 +2,10 @@
 import Navbar from "@/app/(components)/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import Cookie from "js-cookie";
 
 type Login = {
     username: string;
@@ -15,8 +18,25 @@ const page = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<Login>();
-    const onSubmit: SubmitHandler<Login> = (data) => {
+
+    const onSubmit: SubmitHandler<Login> = async (data) => {
         console.log(data);
+
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/auth/login", {
+                username: data.username,
+                password: data.password,
+            });
+
+            console.log(response.data);
+            Cookie.set("token", response.data.access);
+        } catch (error: any) {
+            if (error.response) {
+                console.log(error.message);
+            } else {
+                console.log("something failed");
+            }
+        }
     };
 
     // console.log(watch("username"));
