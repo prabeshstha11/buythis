@@ -29,7 +29,9 @@ const Navbar = () => {
 
     return (
         <div className="h-28 flex justify-between shadow-2xl items-center p-3">
-            <Image src={"/buythis.png"} alt="logo" width={200} height={200}></Image>
+            <Link href={"/"}>
+                <Image src={"/buythis.png"} alt="logo" width={200} height={200}></Image>
+            </Link>
 
             <div>
                 <h1 className="text-3xl font-bold">Delivery in 19 minutes</h1>
