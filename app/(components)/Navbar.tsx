@@ -44,10 +44,15 @@ const Navbar = () => {
                 <h1 className="font-bold">Login</h1>
             </div>
 
-            <div className="relative">
+            <div className="relative w-28">
                 <ShoppingBag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <Button className="h-14 pl-12">My Cart</Button>
             </div>
+
+            {/* <div className="relative w-28">
+                <ShoppingBag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900" />
+                <Button className="h-14 pl-12 bg-[#50fa7b] hover:bg-[#50fa7b] text-gray-900 font-bold">Rs 500 (2)</Button>
+            </div> */}
         </div>
     );
 };
