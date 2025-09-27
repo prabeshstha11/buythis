@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Search, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
     const placeholders = [
@@ -40,19 +41,22 @@ const Navbar = () => {
                 <Input placeholder={placeholders[index]} className="w-full h-full pl-12" />
             </div>
 
-            <div>
-                <h1 className="font-bold">Login</h1>
+            <div className="flex gap-3">
+                <Link href={"/login"}>
+                    <h1 className="font-bold">Login</h1>
+                </Link>
+
+                <h1>|</h1>
+
+                <Link href={"/admin"}>
+                    <h1 className="font-bold text-red-500">(Admin)</h1>
+                </Link>
             </div>
 
-            <div className="relative w-28">
-                <ShoppingBag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Button className="h-14 pl-12">My Cart</Button>
+            <div className="relative w-32">
+                <ShoppingBag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                <Button className="h-14 w-full pl-12">Rs 0 (0)</Button>
             </div>
-
-            {/* <div className="relative w-28">
-                <ShoppingBag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900" />
-                <Button className="h-14 pl-12 bg-[#50fa7b] hover:bg-[#50fa7b] text-gray-900 font-bold">Rs 500 (2)</Button>
-            </div> */}
         </div>
     );
 };
