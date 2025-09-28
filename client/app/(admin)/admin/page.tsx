@@ -10,7 +10,6 @@ import ProductList from "../(screen)/ProductList";
 
 import Cookie from "js-cookie";
 import axios from "axios";
-import { Heading1 } from "lucide-react";
 
 const page = () => {
     const [activeTab, setActiveTab] = useState<"add" | "list" | "order" | null>(null);
@@ -58,9 +57,9 @@ const page = () => {
 
             <div>
                 {activeTab === null && <h1 className="font-bold text-5xl text-center text-red-500 my-10">{message}</h1>}
-                {activeTab === "add" && <AddProduct />}
-                {activeTab === "list" && <ProductList />}
-                {activeTab === "order" && <Order />}
+                {isAdmin ? activeTab === "add" && <AddProduct /> : <h1 className="font-bold text-5xl text-center text-red-500 my-10">You can't access Add Product Page</h1>}
+                {isAdmin ? activeTab === "list" && <ProductList /> : <h1 className="font-bold text-5xl text-center text-red-500 my-10">You can't access list Page</h1>}
+                {isAdmin ? activeTab === "order" && <Order /> : <h1 className="font-bold text-5xl text-center text-red-500 my-10">You can't access order Page</h1>}
             </div>
         </>
     );

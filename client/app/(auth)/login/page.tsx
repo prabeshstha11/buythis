@@ -6,6 +6,7 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import Cookie from "js-cookie";
+import { useRouter } from "next/navigation";
 
 type Login = {
     username: string;
@@ -13,6 +14,8 @@ type Login = {
 };
 
 const page = () => {
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -30,6 +33,7 @@ const page = () => {
 
             console.log(response.data);
             Cookie.set("token", response.data.access);
+            router.push("/");
         } catch (error: any) {
             if (error.response) {
                 console.log(error.message);
