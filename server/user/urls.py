@@ -7,5 +7,5 @@ router.register(r'Items', ItemViewSet, basename="items")
 
 urlpatterns = [
     path("superuser/", check_superuser, name="check_superuser"),
-        path('', include(router.urls)),
+    path('', include(router.urls)),
 ]

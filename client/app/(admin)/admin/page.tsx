@@ -20,7 +20,7 @@ const page = () => {
     useEffect(() => {
         const token = Cookie.get("token");
         axios
-            .get("http://127.0.0.1:8000/test/extra/superuser/", {
+            .get("http://127.0.0.1:8000/api/admin/superuser/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
